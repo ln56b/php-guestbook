@@ -18,7 +18,7 @@ require '../elements/header.php';
 <?php else: ?>
     <ul>
         <?php foreach ($posts as $post): ?>
-            <li><?= $post->name ?></li>
+            <li><a href="/blog/edit.php?id=<?= $post->id ?>"><?= htmlentities($post->name) ?></a></li>
         <?php endforeach; ?>
     </ul>
 <?php endif; ?>
