@@ -1,11 +1,10 @@
 <?php
-$pdo = new PDO('sqlite:../data.db', null, null, [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
-]);
+require 'config.php';
 $error = null;
 $success = null;
-$id = $pdo->quote($_GET['id']);
+if (isset($pdo)) {
+    $id = $pdo->quote($_GET['id']);
+}
 
 try {
     if  (isset($_POST['name'], $_POST['content']))  {

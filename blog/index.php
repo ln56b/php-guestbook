@@ -1,13 +1,12 @@
 <?php
 require_once '../class/Post.php';
-$pdo = new PDO('sqlite:../data.db', null, null, [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
-]);
+require 'config.php';
 $error = null;
 try {
     if (isset($_POST['name'], $_POST['content'])) {
-        $query = $pdo->prepare('INSERT INTO posts (name, content, created_at) VALUES (:name, :content, :created)');
+        if (isset($pdo)) {
+            $query = $pdo->prepare('INSERT INTO posts (name, content, created_at) VALUES (:name, :content, :created)');
+        }
         $query->execute([
             'name' => $_POST['name'],
             'content' => $_POST['content'],
@@ -17,7 +16,9 @@ try {
         exit();
 
     }
-    $query = $pdo->query('SELECT * FROM posts');
+    if (isset($pdo)) {
+        $query = $pdo->query('SELECT * FROM posts');
+    }
     /** @var Post[] */
     $posts = $query->fetchAll(PDO::FETCH_CLASS, 'Post');
 } catch (PDOException $e) {
@@ -30,15 +31,8 @@ require '../elements/header.php';
     <?php if ($error): ?>
         <div class="alert alert-danger"><?= $error ?></div>
     <?php else: ?>
-    <ul>
-        <?php foreach ($posts as $post): ?>
-            <h2><a href="/blog/edit.php?id=<?= $post->id ?>"><?= htmlentities($post->name) ?></a></h2>
-            <p class="small text-muted">Written on <?= $post->created_at->format('d/m/Y H:i') ?></p>
-            <p><?= nl2br(htmlentities($post->getExcerpt())) ?></p>
-        <?php endforeach; ?>
-    </ul>
 
-
+    <h2 class="mt-5 mb-5 text-center">Add a post</h2>
     <form action="" method="post">
         <div class="form-group">
             <input type="text" class="form-control" name="name" placeholder="Enter a title">
@@ -48,6 +42,20 @@ require '../elements/header.php';
         </div>
         <button class="btn btn-primary">Submit</button>
     </form>
+
+    <h2 class="mt-5 mb-5 text-center">All posts</h2>
+    <ul>
+        <?php foreach ($posts as $post): ?>
+            <div class="card mb-5">
+                <div class="card-header"><a
+                            href="/blog/edit.php?id=<?= $post->id ?>"><?= htmlentities($post->name) ?></a></div>
+                <div class="card-body">
+                    <p class="card-subtitle mb-2 text-muted">Written on <?= $post->created_at->format('d/m/Y H:i') ?></p>
+                    <div class="card-text"><?= nl2br(htmlentities($post->getExcerpt())) ?></div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </ul>
 </div>
 <?php endif; ?>
 
