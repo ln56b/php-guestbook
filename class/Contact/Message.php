@@ -4,3 +4,4 @@ namespace General\Contact;
 class Message {
 
 }
+
