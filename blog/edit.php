@@ -29,7 +29,7 @@ require '../elements/header.php';
 
 <div class="container">
     <p>
-        <a href="/blog">Back to post list</a>
+        <a href="/php-guestbook/blog">Back to post list</a>
     </p>
     <?php if ($success) : ?>
         <div class="alert alert-success"><?= $success ?></div>

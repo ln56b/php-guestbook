@@ -1,4 +1,5 @@
 <?php
+
 namespace General;
 
 class Post
@@ -14,6 +15,14 @@ class Post
         if (is_int($this->created_at) || is_string($this->created_at)) {
             $this->created_at = new \DateTime('@' . $this->created_at);
         }
+    }
+
+    // Test on parseDown library
+    public function getBody(): string
+    {
+        $parsedown = new \Parsedown();
+        $parsedown->setSafeMode(true);
+        return $parsedown->text($this->content);
     }
 
     public function getExcerpt(): string

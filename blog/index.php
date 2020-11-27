@@ -15,7 +15,7 @@ try {
             'content' => $_POST['content'],
             'created' => time()
         ]);
-        header('Location: /blog/edit.php?id=' . $pdo->lastInsertId());
+        header('Location: /php-guestbook/blog/edit.php?id=' . $pdo->lastInsertId());
         exit();
 
     }
@@ -50,12 +50,15 @@ require '../elements/header.php';
     <h2 class="mt-5 mb-5 text-center">All posts</h2>
     <ul>
         <?php foreach ($posts as $post): ?>
+            <!--        Test on parseDown library
+            -->        <?php dump($post) ?>
             <div class="card mb-5">
                 <div class="card-header"><a
-                            href="/blog/edit.php?id=<?= $post->id ?>"><?= htmlentities($post->name) ?></a></div>
+                            href="/php-guestbook/blog/edit.php?id=<?= $post->id ?>"><?= htmlentities($post->name) ?></a></div>
                 <div class="card-body">
-                    <p class="card-subtitle mb-2 text-muted">Written on <?= $post->created_at->format('d/m/Y H:i') ?></p>
-                    <div class="card-text"><?= nl2br(htmlentities($post->getExcerpt())) ?></div>
+                    <p class="card-subtitle mb-2 text-muted">Written
+                        on <?= $post->created_at->format('d/m/Y H:i') ?></p>
+                    <div class="card-text"><?= nl2br(htmlentities($post->getBody())) ?></div>
                 </div>
             </div>
         <?php endforeach; ?>

@@ -11,5 +11,8 @@
             "General\\": "class/"
         }
     },
-    "require": {}
+    "require": {
+        "erusev/parsedown": "^1.7",
+        "symfony/var-dumper": "^5.1"
+    }
 }
