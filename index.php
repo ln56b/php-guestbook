@@ -1,8 +1,18 @@
 <?php
+
+use General\{
+    Guestbook,
+    Message
+};
+use General\Contact\Message as ContactMessage;
+
 require_once 'class/Message.php';
 require_once 'class/Guestbook.php';
+require_once  'class/contact/message.php';
+
 $errors = null;
 $success = false;
+$demoAlias = new ContactMessage();
 $guestbook = new Guestbook(__DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'messages');
 
 if (isset($_POST['username'], $_POST['comment'])) {

@@ -1,5 +1,10 @@
 <?php
+namespace General;
+
+use General\Message;
+
 require_once 'Message.php';
+
 
 class Guestbook
 {

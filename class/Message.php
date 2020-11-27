@@ -1,4 +1,8 @@
 <?php
+namespace General;
+
+use \DateTime;
+use \DateTimeZone;
 
 class Message
 {
@@ -8,9 +12,10 @@ class Message
     private $comment;
     private $date;
 
-    public static function fromJSON(string $json): Message {
+    public static function fromJSON(string $json): Message
+    {
         $data = json_decode($json, true);
-        return new self($data['username'], $data['comment'], new DateTime("@" .$data['date']));
+        return new self($data['username'], $data['comment'], new DateTime("@" . $data['date']));
     }
 
     public function __construct(string $username, string $comment, ?DateTime $date = null)
