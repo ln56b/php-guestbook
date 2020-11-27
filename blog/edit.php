@@ -8,7 +8,7 @@ $success = null;
 $id = $pdo->quote($_GET['id']);
 
 try {
-    if (isset($_POST['name']) && isset($_POST['content'])) {
+    if  (isset($_POST['name'], $_POST['content']))  {
         $query = $pdo->prepare('UPDATE posts SET name = :name, content = :content WHERE id = :id');
         $query->execute([
             'name' => $_POST['name'],
