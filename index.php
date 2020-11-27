@@ -1,14 +1,11 @@
 <?php
-
+// PHP searches dynamically for the class and import it. No need of require.
+require 'vendor/autoload.php';
 use General\{
     Guestbook,
     Message
 };
 use General\Contact\Message as ContactMessage;
-
-require_once 'class/Message.php';
-require_once 'class/Guestbook.php';
-require_once  'class/contact/message.php';
 
 $errors = null;
 $success = false;

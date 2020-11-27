@@ -1,0 +1,15 @@
+{
+    "name": "hbaudrand/guestbook",
+    "authors": [
+        {
+            "name": "Hélène Baudrand",
+            "email": "baudrand.helene@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "General\\": "class/"
+        }
+    },
+    "require": {}
+}

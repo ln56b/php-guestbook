@@ -1,6 +1,6 @@
 <?php
 namespace General;
-
+// Means this is from root directory - USED when PHP Classes.
 use \DateTime;
 use \DateTimeZone;
 

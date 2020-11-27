@@ -1,5 +1,8 @@
 <?php
-require_once '../class/Post.php';
+
+use General\Post;
+
+require_once '../vendor/autoload.php';
 require 'config.php';
 $error = null;
 try {
@@ -20,7 +23,8 @@ try {
         $query = $pdo->query('SELECT * FROM posts');
     }
     /** @var Post[] */
-    $posts = $query->fetchAll(PDO::FETCH_CLASS, 'Post');
+    // Post::class returns the class name as a string
+    $posts = $query->fetchAll(PDO::FETCH_CLASS, Post::class);
 } catch (PDOException $e) {
     $error = $e->getMessage();
 }
